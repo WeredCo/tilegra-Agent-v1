@@ -36,26 +36,26 @@ export default function ChatWindow() {
   const tools: Tool[] = [
     {
       id: "business-improvement",
-      name: "Business Improvement",
-      description: "Discover how Tilegra can enhance your business operations",
+      name: "Mejora de Negocios",
+      description: "Descubre cómo Tilegra puede mejorar tus operaciones empresariales",
       icon: <Lightbulb className="h-5 w-5" />,
     },
     {
       id: "how-it-works",
-      name: "How It Works",
-      description: "Learn about Tilegra's AI technology and implementation process",
+      name: "Cómo Funciona",
+      description: "Conoce la tecnología de IA de Tilegra y su proceso de implementación",
       icon: <Info className="h-5 w-5" />,
     },
     {
       id: "pre-built-demo",
-      name: "Try Pre-built Demo",
-      description: "Explore our ready-to-use AI solutions",
+      name: "Probar Demo Prediseñada",
+      description: "Explora nuestras soluciones de IA listas para usar",
       icon: <Zap className="h-5 w-5" />,
     },
     {
       id: "custom-demo",
-      name: "Custom Solution",
-      description: "Get a personalized AI solution tailored to your needs",
+      name: "Solución Personalizada",
+      description: "Obtén una solución de IA personalizada según tus necesidades",
       icon: <Settings className="h-5 w-5" />,
     },
   ]
@@ -69,7 +69,7 @@ export default function ChatWindow() {
       {
         role: "bot",
         content:
-          "Welcome to Tilegra AI Solutions! I'm your virtual assistant. How can I help you today? You can ask about how we can improve your business, how our technology works, or try one of our demos.",
+          "¡Bienvenido a Tilegra Soluciones de IA! Soy tu asistente virtual. ¿Cómo puedo ayudarte hoy? Puedes preguntar sobre cómo podemos mejorar tu negocio, cómo funciona nuestra tecnología o probar una de nuestras demos.",
       },
     ])
 
@@ -93,7 +93,7 @@ export default function ChatWindow() {
     try {
       // Use the webhook to get AI response
       const response = await fetch(
-        `https://primary-production-b01f.up.railway.app/webhook/receive-msg?message=${encodeURIComponent(
+        `https://primary-production-b01f.up.railway.app/webhook/receive-msg-tilegra?message=${encodeURIComponent(
           content,
         )}&sessionId=${sessionId}${tool ? `&tool=${encodeURIComponent(tool)}` : ""}`,
       )
@@ -101,18 +101,18 @@ export default function ChatWindow() {
 
       const botMessage: Message = {
         role: "bot",
-        content: data.output || "No response from the AI.",
+        content: data.output || "No hay respuesta de la IA.",
         tool,
       }
       setMessages((prev) => [...prev, botMessage])
     } catch (error) {
-      console.error("Error contacting the AI:", error)
+      console.error("Error al contactar a la IA:", error)
       setMessages((prev) => [
         ...prev,
         {
           role: "bot",
           content:
-            "I apologize, but I'm having trouble connecting to our systems. Please try again later or contact our support team.",
+            "Disculpa, estoy teniendo problemas para conectarme a nuestros sistemas. Por favor, intenta nuevamente más tarde o contacta a nuestro equipo de soporte.",
         },
       ])
     } finally {
@@ -123,7 +123,7 @@ export default function ChatWindow() {
   }
 
   const handleToolSelect = (tool: Tool) => {
-    sendMessage(`I'd like to learn about ${tool.name}`, tool.id)
+    sendMessage(`Me gustaría conocer sobre ${tool.name}`, tool.id)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -147,10 +147,10 @@ export default function ChatWindow() {
       <header className="flex h-16 items-center justify-between border-b border-zinc-800 px-4">
         <div className="flex items-center gap-2">
           <Bot className="h-5 w-5 text-purple-400" />
-          <h1 className="text-lg font-medium">Tilegra AI Assistant</h1>
+          <h1 className="text-lg font-medium">Asistente de IA Tilegra</h1>
         </div>
         <Badge variant="outline" className="bg-purple-900/30 text-purple-200 border-purple-700 hover:bg-purple-800/30">
-          Demo Version
+          Versión Demo
         </Badge>
       </header>
 
@@ -159,9 +159,9 @@ export default function ChatWindow() {
           <div className="h-full flex items-center justify-center text-center p-8">
             <div className="max-w-md space-y-2">
               <Bot className="h-12 w-12 mx-auto text-zinc-500" />
-              <h3 className="text-lg font-medium text-zinc-300">Bienvenido al Asistente de Repuestos</h3>
+              <h3 className="text-lg font-medium text-zinc-300">Bienvenido al Asistente de IA Tilegra</h3>
               <p className="text-sm text-zinc-400">
-                Haz una pregunta sobre repuestos y te ayudaré a encontrar la información que necesitas.
+                Haz una pregunta sobre nuestras soluciones de IA y te ayudaré a encontrar la información que necesitas.
               </p>
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function ChatWindow() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about Tilegra AI solutions..."
+            placeholder="Pregunta sobre las soluciones de IA de Tilegra..."
             className="flex-1 bg-zinc-800 border-zinc-700 text-zinc-100 placeholder:text-zinc-400 focus-visible:ring-purple-500"
             disabled={loading}
           />
@@ -280,7 +280,7 @@ export default function ChatWindow() {
             className="h-10 w-10 rounded-full bg-purple-600 hover:bg-purple-700 text-white"
           >
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-            <span className="sr-only">Send message</span>
+            <span className="sr-only">Enviar mensaje</span>
           </Button>
         </form>
       </footer>
