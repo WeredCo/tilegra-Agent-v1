@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import { MobileSidebar } from "@/components/mobile-sidebar"
 
 type Message = {
   role: "user" | "bot"
@@ -146,17 +147,18 @@ export default function ChatWindow() {
     <div className="flex h-screen flex-col bg-zinc-900 text-white">
       <header className="flex h-16 items-center justify-between border-b border-zinc-800 px-4">
         <div className="flex items-center gap-2">
+          <MobileSidebar />
           <Bot className="h-5 w-5 text-purple-400" />
           <h1 className="text-lg font-medium">Asistente de IA Tilegra</h1>
         </div>
         <Badge variant="outline" className="bg-purple-900/30 text-purple-200 border-purple-700 hover:bg-purple-800/30">
-          Versión Demo
+          <span className="hidden sm:inline">Versión</span> Demo
         </Badge>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-4">
         {messages.length === 0 && !loading && (
-          <div className="h-full flex items-center justify-center text-center p-8">
+          <div className="h-full flex items-center justify-center text-center p-4 sm:p-8">
             <div className="max-w-md space-y-2">
               <Bot className="h-12 w-12 mx-auto text-zinc-500" />
               <h3 className="text-lg font-medium text-zinc-300">Bienvenido al Asistente de IA Tilegra</h3>
@@ -170,10 +172,10 @@ export default function ChatWindow() {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={cn("flex items-start gap-2.5 group", msg.role === "user" ? "justify-end" : "justify-start")}
+            className={cn("flex items-start gap-2 group", msg.role === "user" ? "justify-end" : "justify-start")}
           >
             {msg.role === "bot" && (
-              <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800">
+              <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800 flex-shrink-0">
                 <AvatarFallback className="bg-purple-900 text-purple-100">
                   <Bot className="h-4 w-4" />
                 </AvatarFallback>
@@ -182,7 +184,7 @@ export default function ChatWindow() {
 
             <div
               className={cn(
-                "rounded-lg px-4 py-2 max-w-[80%]",
+                "rounded-lg px-3 py-2 max-w-[85%] sm:max-w-[75%] break-words",
                 msg.role === "user"
                   ? "bg-purple-600 text-white rounded-tr-none"
                   : "bg-zinc-800 text-zinc-100 rounded-tl-none border border-zinc-700",
@@ -195,7 +197,7 @@ export default function ChatWindow() {
             </div>
 
             {msg.role === "user" && (
-              <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800">
+              <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800 flex-shrink-0">
                 <AvatarFallback className="bg-zinc-700 text-zinc-200">
                   <User className="h-4 w-4" />
                 </AvatarFallback>
@@ -205,8 +207,8 @@ export default function ChatWindow() {
         ))}
 
         {loading && (
-          <div className="flex items-start gap-2.5">
-            <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800">
+          <div className="flex items-start gap-2">
+            <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800 flex-shrink-0">
               <AvatarFallback className="bg-purple-900 text-purple-100">
                 <Bot className="h-4 w-4" />
               </AvatarFallback>
@@ -231,15 +233,15 @@ export default function ChatWindow() {
         )}
 
         {showTools && messages.length === 1 && !loading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+          <div className="grid grid-cols-1 gap-3 mt-4 px-2 sm:px-0">
             {tools.map((tool) => (
               <Card
                 key={tool.id}
                 className="bg-zinc-800 border-zinc-700 hover:border-purple-500 cursor-pointer transition-all"
                 onClick={() => handleToolSelect(tool)}
               >
-                <CardContent className="p-4 flex items-start gap-3">
-                  <div className="mt-1 bg-purple-900/30 p-2 rounded-lg text-purple-300">{tool.icon}</div>
+                <CardContent className="p-3 sm:p-4 flex items-start gap-3">
+                  <div className="mt-1 bg-purple-900/30 p-2 rounded-lg text-purple-300 flex-shrink-0">{tool.icon}</div>
                   <div>
                     <h3 className="font-medium text-zinc-100">{tool.name}</h3>
                     <p className="text-xs text-zinc-400 mt-1">{tool.description}</p>
@@ -250,10 +252,10 @@ export default function ChatWindow() {
           </div>
         )}
 
-        <div ref={bottomRef} />
+        <div ref={bottomRef} className="h-1" />
       </div>
 
-      <footer className="border-t border-zinc-800 bg-zinc-950 p-4">
+      <footer className="border-t border-zinc-800 bg-zinc-950 p-2 sm:p-4">
         <form
           onSubmit={(e) => {
             e.preventDefault()
@@ -269,18 +271,18 @@ export default function ChatWindow() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Pregunta sobre las soluciones de IA de Tilegra..."
-            className="flex-1 bg-zinc-800 border-zinc-700 text-zinc-100 placeholder:text-zinc-400 focus-visible:ring-purple-500"
+            placeholder="Pregunta sobre Tilegra..."
+            className="flex-1 bg-zinc-800 border-zinc-700 text-zinc-100 placeholder:text-zinc-400 focus-visible:ring-purple-500 h-10 sm:h-auto"
             disabled={loading}
           />
           <Button
             type="submit"
             size="icon"
             disabled={loading || !input.trim()}
-            className="h-10 w-10 rounded-full bg-purple-600 hover:bg-purple-700 text-white"
+            className="h-10 w-10 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex-shrink-0"
+            aria-label="Enviar mensaje"
           >
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-            <span className="sr-only">Enviar mensaje</span>
           </Button>
         </form>
       </footer>

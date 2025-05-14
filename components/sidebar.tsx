@@ -53,8 +53,18 @@ export function Sidebar({ className, ...props }: SidebarProps) {
             Soluciones Personalizadas
           </Button>
         </nav>
-      
-        
+        <div className="px-4 mt-8 mb-4">
+          <h2 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Analítica</h2>
+        </div>
+        <nav className="grid items-start px-2 text-sm font-medium">
+          <Button
+            variant="ghost"
+            className="flex w-full items-center justify-start gap-3 rounded-lg px-3 py-2 text-zinc-200 hover:bg-zinc-800 hover:text-white"
+          >
+            <BarChart className="h-4 w-4" />
+            Métricas de Rendimiento
+          </Button>
+        </nav>
       </div>
       <div className="border-t border-zinc-800 p-4">
         <div className="rounded-lg bg-zinc-900 p-3">

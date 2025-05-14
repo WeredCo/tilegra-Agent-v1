@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "Tilegra Soluciones de IA",
   description: "Soluciones avanzadas de IA para la transformación empresarial",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
     generator: 'v0.dev'
 }
 
