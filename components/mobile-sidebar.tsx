@@ -14,7 +14,7 @@ export function MobileSidebar() {
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden text-zinc-200 hover:bg-zinc-800 hover:text-white"
+        className="md:hidden text-tilegra-text hover:bg-tilegra-card hover:text-white"
         onClick={() => setOpen(true)}
       >
         <Menu className="h-5 w-5" />
@@ -33,7 +33,7 @@ export function MobileSidebar() {
           open ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="absolute right-0 top-0 mr-2 mt-2 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-900 text-zinc-200">
+        <div className="absolute right-0 top-0 mr-2 mt-2 flex h-7 w-7 items-center justify-center rounded-full bg-tilegra-card text-tilegra-text">
           <Button variant="ghost" size="icon" className="h-7 w-7 p-0" onClick={() => setOpen(false)}>
             <X className="h-4 w-4" />
             <span className="sr-only">Cerrar menú</span>

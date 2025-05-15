@@ -3,7 +3,7 @@ import { Sidebar } from "@/components/sidebar"
 
 export default function Home() {
   return (
-    <div className="flex h-screen bg-zinc-950">
+    <div className="flex h-screen bg-tilegra-background">
       <div className="hidden md:block">
         <Sidebar />
       </div>

@@ -144,15 +144,18 @@ export default function ChatWindow() {
   }
 
   return (
-    <div className="flex h-screen flex-col bg-zinc-900 text-white">
-      <header className="flex h-16 items-center justify-between border-b border-zinc-800 px-4">
+    <div className="flex h-screen flex-col bg-tilegra-background text-tilegra-text">
+      <header className="flex h-16 items-center justify-between border-b border-tilegra-border px-4">
         <div className="flex items-center gap-2">
           <MobileSidebar />
-          <Bot className="h-5 w-5 text-purple-400" />
+          <Bot className="h-5 w-5 text-tilegra-glow" />
           <h1 className="text-lg font-medium">Asistente de IA Tilegra</h1>
         </div>
-        <Badge variant="outline" className="bg-purple-900/30 text-purple-200 border-purple-700 hover:bg-purple-800/30">
-          <span className="hidden sm:inline">Versión</span> Demo
+        <Badge
+          variant="outline"
+          className="bg-tilegra-accent/20 text-tilegra-text border-tilegra-accent hover:bg-tilegra-accent/30"
+        >
+          <span className="hidden sm:inline">Demo</span> 
         </Badge>
       </header>
 
@@ -160,9 +163,9 @@ export default function ChatWindow() {
         {messages.length === 0 && !loading && (
           <div className="h-full flex items-center justify-center text-center p-4 sm:p-8">
             <div className="max-w-md space-y-2">
-              <Bot className="h-12 w-12 mx-auto text-zinc-500" />
-              <h3 className="text-lg font-medium text-zinc-300">Bienvenido al Asistente de IA Tilegra</h3>
-              <p className="text-sm text-zinc-400">
+              <Bot className="h-12 w-12 mx-auto text-tilegra-glow" />
+              <h3 className="text-lg font-medium text-tilegra-text">Bienvenido al Asistente de IA Tilegra</h3>
+              <p className="text-sm text-tilegra-muted">
                 Haz una pregunta sobre nuestras soluciones de IA y te ayudaré a encontrar la información que necesitas.
               </p>
             </div>
@@ -175,8 +178,8 @@ export default function ChatWindow() {
             className={cn("flex items-start gap-2 group", msg.role === "user" ? "justify-end" : "justify-start")}
           >
             {msg.role === "bot" && (
-              <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800 flex-shrink-0">
-                <AvatarFallback className="bg-purple-900 text-purple-100">
+              <Avatar className="h-8 w-8 border border-tilegra-border bg-tilegra-card flex-shrink-0">
+                <AvatarFallback className="bg-tilegra-accent text-tilegra-text">
                   <Bot className="h-4 w-4" />
                 </AvatarFallback>
               </Avatar>
@@ -186,8 +189,8 @@ export default function ChatWindow() {
               className={cn(
                 "rounded-lg px-3 py-2 max-w-[85%] sm:max-w-[75%] break-words",
                 msg.role === "user"
-                  ? "bg-purple-600 text-white rounded-tr-none"
-                  : "bg-zinc-800 text-zinc-100 rounded-tl-none border border-zinc-700",
+                  ? "bg-tilegra-glow text-white rounded-tr-none"
+                  : "bg-tilegra-card text-tilegra-text rounded-tl-none border border-tilegra-border",
               )}
             >
               <div
@@ -197,8 +200,8 @@ export default function ChatWindow() {
             </div>
 
             {msg.role === "user" && (
-              <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800 flex-shrink-0">
-                <AvatarFallback className="bg-zinc-700 text-zinc-200">
+              <Avatar className="h-8 w-8 border border-tilegra-border bg-tilegra-card flex-shrink-0">
+                <AvatarFallback className="bg-tilegra-card text-tilegra-text">
                   <User className="h-4 w-4" />
                 </AvatarFallback>
               </Avatar>
@@ -208,23 +211,23 @@ export default function ChatWindow() {
 
         {loading && (
           <div className="flex items-start gap-2">
-            <Avatar className="h-8 w-8 border border-zinc-800 bg-zinc-800 flex-shrink-0">
-              <AvatarFallback className="bg-purple-900 text-purple-100">
+            <Avatar className="h-8 w-8 border border-tilegra-border bg-tilegra-card flex-shrink-0">
+              <AvatarFallback className="bg-tilegra-accent text-tilegra-text">
                 <Bot className="h-4 w-4" />
               </AvatarFallback>
             </Avatar>
-            <div className="bg-zinc-800 text-zinc-100 rounded-lg rounded-tl-none border border-zinc-700 px-4 py-2">
+            <div className="bg-tilegra-card text-tilegra-text rounded-lg rounded-tl-none border border-tilegra-border px-4 py-2">
               <div className="flex items-center gap-1.5">
                 <span
-                  className="h-2 w-2 bg-purple-400 rounded-full animate-bounce"
+                  className="h-2 w-2 bg-tilegra-glow rounded-full animate-bounce"
                   style={{ animationDelay: "0ms" }}
                 ></span>
                 <span
-                  className="h-2 w-2 bg-purple-400 rounded-full animate-bounce"
+                  className="h-2 w-2 bg-tilegra-glow rounded-full animate-bounce"
                   style={{ animationDelay: "150ms" }}
                 ></span>
                 <span
-                  className="h-2 w-2 bg-purple-400 rounded-full animate-bounce"
+                  className="h-2 w-2 bg-tilegra-glow rounded-full animate-bounce"
                   style={{ animationDelay: "300ms" }}
                 ></span>
               </div>
@@ -237,14 +240,16 @@ export default function ChatWindow() {
             {tools.map((tool) => (
               <Card
                 key={tool.id}
-                className="bg-zinc-800 border-zinc-700 hover:border-purple-500 cursor-pointer transition-all"
+                className="bg-tilegra-card border-tilegra-border hover:border-tilegra-glow cursor-pointer transition-all"
                 onClick={() => handleToolSelect(tool)}
               >
                 <CardContent className="p-3 sm:p-4 flex items-start gap-3">
-                  <div className="mt-1 bg-purple-900/30 p-2 rounded-lg text-purple-300 flex-shrink-0">{tool.icon}</div>
+                  <div className="mt-1 bg-tilegra-accent/20 p-2 rounded-lg text-tilegra-glow flex-shrink-0">
+                    {tool.icon}
+                  </div>
                   <div>
-                    <h3 className="font-medium text-zinc-100">{tool.name}</h3>
-                    <p className="text-xs text-zinc-400 mt-1">{tool.description}</p>
+                    <h3 className="font-medium text-tilegra-text">{tool.name}</h3>
+                    <p className="text-xs text-tilegra-muted mt-1">{tool.description}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -255,7 +260,7 @@ export default function ChatWindow() {
         <div ref={bottomRef} className="h-1" />
       </div>
 
-      <footer className="border-t border-zinc-800 bg-zinc-950 p-2 sm:p-4">
+      <footer className="border-t border-tilegra-border bg-tilegra-background p-2 sm:p-4">
         <form
           onSubmit={(e) => {
             e.preventDefault()
@@ -272,14 +277,14 @@ export default function ChatWindow() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Pregunta sobre Tilegra..."
-            className="flex-1 bg-zinc-800 border-zinc-700 text-zinc-100 placeholder:text-zinc-400 focus-visible:ring-purple-500 h-10 sm:h-auto"
+            className="flex-1 bg-tilegra-card border-tilegra-border text-tilegra-text placeholder:text-tilegra-muted focus-visible:ring-tilegra-glow focus-visible:border-tilegra-glow h-10 sm:h-auto"
             disabled={loading}
           />
           <Button
             type="submit"
             size="icon"
             disabled={loading || !input.trim()}
-            className="h-10 w-10 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex-shrink-0"
+            className="h-10 w-10 rounded-full bg-tilegra-glow hover:bg-tilegra-glow/90 text-white flex-shrink-0 shadow-[0_0_15px_rgba(42,92,163,0.5)]"
             aria-label="Enviar mensaje"
           >
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
